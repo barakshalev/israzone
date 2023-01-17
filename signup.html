@@ -1,33 +1,91 @@
+<?php
+
+		include ("classes/connectioncl.php");
+		include ("classes/signupcl.php");
+
+
+
+	$userid = "";
+	$user_name = "";
+	$email = "";
+	$password = "";
+	$url_adderess = "";
+
+
+	if($_SERVER['REQUEST_METHOD'] == 'POST')
+	{
+
+	
+	$signup = new Signup();
+	$result = $signup->evaluate($_POST);
+
+	if($result != "")
+	{
+		
+		echo "<div style='text-align:center;background-color:white'>";
+		echo "יש למלא את כל הפרטים<br>";
+		echo $result;
+		echo "</div>";
+	}else
+	{
+	
+		header("Location: login.php");
+		die;
+	}
+		
+		$userid = $_POST['israzone_userid'];
+		$user_name = $_POST['user_name'];
+		$email = $_POST['email'];
+		$password = $_POST['password'];
+		$url_address = $_POST['url_address'];
+
+	}
+?>
+
 <html>
 <head>
-<title>Israzone | Sign up</title>
+<title>Israzone | הרשמה</title>
 </head>
-
-<body style="background-color: #e9ebee; ">
-<div style="height:100px;background-color: #0171BB; ">
-<div style="color: #f3faff;font-size: 75px;font-family: HoboStd;padding: 10px; ">Israzone</div>
+<br>
+<body style="background-color: #eeeeee; ">
+<div style="color: #434343;font-size: 55px;text-align: center;font-family: HoboStd;color: #0171bb;">Israzone</div>
+<br>
 
 </div>
 
+	
 
-<div style="height: 370px;width: 500px;background-color: white; margin: auto; margin-top: 65px;padding: 70px; text-align: center;font-family: tahoma;font-size: 25px; ">Sign up to Israzone<br><br>
-<input type="text" placeholder="Phone, email, or username" style="height: 40px;width: 300px;border-radius: 4px;border: solid 1px #0171BB;font-size: 15px;padding: 4px; "><br><br>
+<div style="height: 420px;width: 500px;background-color: white; margin: auto; margin-top: 20px;padding: 50px; text-align: center;font-size: 18px;font-weight: bold; ">הרשמה לרשת ישראזון<br><br>
 
 
-<input type="password" placeholder="Password" style="height: 40px;width: 300px;border-radius: 4px;border: solid 1px #0171BB;font-size: 15px;padding: 4px; "><br><br>
-<input type="password" placeholder="Retype Password" style="height: 40px;width: 300px;border-radius: 4px;border: solid 1px #0171BB;font-size: 15px;padding: 4px; "><br><br>
+	<form method="post" action="">
 
-<select style="height: 40px;width: 300px;border-radius: 4px;border: solid 1px #0171BB;font-size: 15px;padding: 4px; ">
+<input value="<?php echo $user_name ?>" name="user_name" type="text" placeholder="שם משתמש" style="height: 40px;width: 300px;border-radius: 4px;border: solid 1px #0171BB;font-size: 15px;padding: 4px;text-align: right; "><br><br>
 
-<option>Where are you from?</option>
-<option>Israel 🇮🇱</option>
+
+<input value="<?php echo $email ?>" name="email" type="text" placeholder="אימייל" style="height: 40px;width: 300px;border-radius: 4px;border: solid 1px #0171BB;font-size: 15px;padding: 4px;text-align: right;  "><br><br>
+
+
+<input name="password" type="password" placeholder="סיסמא" style="height: 40px;width: 300px;border-radius: 4px;border: solid 1px #0171BB;font-size: 15px;padding: 4px;text-align: right;  "><br><br>
+
+<input name="password2" type="password" placeholder="לוודא סיסמא שוב" style="height: 40px;width: 300px;border-radius: 4px;border: solid 1px #0171BB;font-size: 15px;padding: 4px;text-align: right;  "><br><br>
+
+<select name="nationality" style="height: 40px;width: 300px;border-radius: 4px;border: solid 1px #0171BB;font-size: 15px;padding: 4px;text-align: right; ">
+
+<option style="color: #434343;">מאיפה בעולם‫?‬<?php echo $nationality ?> </option>
+<option>ישראל 🇮🇱</option>
 <option>Worldwide 🌐</option>
 
 </select><br><br>
 
 
-<input type="submit" style="width: 300px;height: 40px;border-radius: 4px;font-weight: bold;border: none;background-color: #0171BB ;color: white; " value="Sign up">
+<input type="submit" style="width: 300px;height: 40px;border-radius: 4px;font-weight: bold;border: none;background-color: #0171BB ;color: white; "value="להירשם">
 
+	</form>
+	
+	<a href="login.php" style="color: #0171bb;font-size: 14px;"><br>כניסה לרשומים</a>
+
+</div>
 
 </body>
 </html>
